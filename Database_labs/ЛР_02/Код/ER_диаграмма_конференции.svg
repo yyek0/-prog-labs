@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <style>
+    .entity { fill: #edf3fb; stroke: #1f4e79; stroke-width: 2; }
+    .title { font: bold 18px Arial; fill: #1f1f1f; }
+    .field { font: 14px Arial; fill: #1f1f1f; }
+    .line { stroke: #4f81bd; stroke-width: 2; marker-end: url(#arrow); }
+    .label { font: 13px Arial; fill: #1f4e79; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4f81bd" />
+    </marker>
+  </defs>
+  <rect class="entity" x="470" y="30" width="250" height="110" rx="8" />
+  <text class="title" x="540" y="58">Конференция</text>
+  <text class="field" x="490" y="86">ConferenceId (PK)</text>
+  <text class="field" x="490" y="108">Название, даты, город</text>
+  <text class="field" x="490" y="130">Организатор, статус</text>
+  <rect class="entity" x="80" y="230" width="230" height="110" rx="8" />
+  <text class="title" x="145" y="258">Участник</text>
+  <text class="field" x="100" y="286">ParticipantId (PK)</text>
+  <text class="field" x="100" y="308">ФИО, организация</text>
+  <text class="field" x="100" y="330">Email, город</text>
+  <rect class="entity" x="380" y="230" width="230" height="110" rx="8" />
+  <text class="title" x="465" y="258">Статья</text>
+  <text class="field" x="400" y="286">ArticleId (PK)</text>
+  <text class="field" x="400" y="308">Название, страницы</text>
+  <text class="field" x="400" y="330">Дата, статус</text>
+  <rect class="entity" x="770" y="230" width="230" height="110" rx="8" />
+  <text class="title" x="836" y="258">Секция</text>
+  <text class="field" x="790" y="286">SectionId (PK)</text>
+  <text class="field" x="790" y="308">Название, председатель</text>
+  <text class="field" x="790" y="330">Время работы</text>
+  <rect class="entity" x="380" y="500" width="230" height="100" rx="8" />
+  <text class="title" x="440" y="528">Презентация</text>
+  <text class="field" x="400" y="556">PresentationId (PK)</text>
+  <text class="field" x="400" y="578">Файл, число слайдов</text>
+  <rect class="entity" x="770" y="500" width="230" height="100" rx="8" />
+  <text class="title" x="840" y="528">Заседание</text>
+  <text class="field" x="790" y="556">SessionId (PK)</text>
+  <text class="field" x="790" y="578">Дата, время, аудитория</text>
+  <line class="line" x1="550" y1="140" x2="495" y2="230" />
+  <line class="line" x1="550" y1="140" x2="885" y2="230" />
+  <line class="line" x1="310" y1="285" x2="380" y2="285" />
+  <line class="line" x1="495" y1="340" x2="495" y2="500" />
+  <line class="line" x1="885" y1="340" x2="885" y2="500" />
+  <line class="line" x1="610" y1="550" x2="770" y2="550" />
+  <text class="label" x="525" y="190">1 : N</text>
+  <text class="label" x="700" y="190">1 : N</text>
+  <text class="label" x="330" y="275">1 : N</text>
+  <text class="label" x="510" y="440">1 : 1</text>
+  <text class="label" x="900" y="440">1 : N</text>
+  <text class="label" x="665" y="540">N : 1</text>
+</svg>
