@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Галерея во фрейме</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Галерея природы</h1>
+        <div class="row">
+            <nav style="width:180px">
+                <p>
+                    <a href="view1.html" target="gallery">Горы</a>
+                </p>
+                <p>
+                    <a href="view2.html" target="gallery">Озеро</a>
+                </p>
+                <p>
+                    <a href="view3.html" target="gallery">Лес</a>
+                </p>
+            </nav>
+            <iframe src="view1.html" name="gallery" title="Выбранный рисунок" width="680" height="480" style="border:1px solid #8397a6;max-width:100%">
+            </iframe>
+        </div>
+    </body>
+</html>

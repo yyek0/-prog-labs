@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Учебный клуб</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main>
+            <h1>Учебный клуб</h1>
+            <p>Заполните данные регистрации, затем выполните тестовый вход.</p>
+            <form id="account">
+                <fieldset>
+                    <legend>Регистрация</legend>
+                    <label>Логин <input name="login" required></label>
+                    <label>Пароль <input name="password" type="password" required></label>
+                    <label>Контрольный вопрос <input name="question" required></label>
+                    <label>Ответ на контрольный вопрос <input name="answer" required></label>
+                    <button type="button" id="register">Зарегистрироваться</button>
+                </fieldset>
+                <fieldset id="sign-in" hidden>
+                    <legend>Тестовый вход</legend>
+                    <label>Логин <input name="enteredLogin"></label>
+                    <label>Пароль <input name="enteredPassword" type="password"></label>
+                    <label>Ответ на контрольный вопрос <input name="recovery"></label>
+                    <button type="button" id="enter">Войти</button>
+                </fieldset>
+            </form>
+            <p id="status" class="result" role="status"></p>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>

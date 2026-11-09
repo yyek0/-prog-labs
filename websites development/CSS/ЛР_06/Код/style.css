@@ -1,0 +1,281 @@
+*
+{
+    box-sizing: border-box
+}
+body
+{
+    margin: 32px auto;
+    padding: 0 24px;
+    max-width: 1000px;
+    font: 18px/1.55 Arial, sans-serif;
+    color: #233447;
+    background: #f6f8fb
+}
+h1, h2, h3
+{
+    line-height: 1.2;
+    color: #173f66
+}
+h1
+{
+    font-size: 32px
+}
+h2
+{
+    font-size: 24px
+}
+a
+{
+    color: #155d9b
+}
+a:hover
+{
+    color: #91470a
+}
+main, article, section, fieldset
+{
+    margin: 20px 0
+}
+button, input, select, textarea
+{
+    font: inherit
+}
+button, input[type=submit], input[type=reset]
+{
+    padding: 9px 18px;
+    cursor: pointer
+}
+input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]), select, textarea
+{
+    max-width: 100%;
+    padding: 6px;
+    border: 1px solid #8094a8;
+    border-radius: 3px
+}
+label
+{
+    display: block;
+    margin: 12px 0
+}
+fieldset
+{
+    border: 1px solid #9caebe;
+    padding: 16px
+}
+img, video
+{
+    max-width: 100%;
+    height: auto
+}
+table
+{
+    border-collapse: collapse;
+    background: white
+}
+th, td
+{
+    border: 1px solid #7f91a2;
+    padding: 12px 18px
+}
+th
+{
+    background: #e5edf5
+}
+pre
+{
+    white-space: pre-wrap;
+    background: #edf1f5;
+    padding: 16px
+}
+footer
+{
+    border-top: 1px solid #c8d3dc;
+    margin-top: 32px;
+    padding-top: 16px;
+    font-size: 15px
+}
+.row
+{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap
+}
+.result
+{
+    padding: 16px;
+    background: #e5edf5;
+    min-height: 58px
+}
+figure
+{
+    margin: 20px 0
+}
+figcaption
+{
+    font-size: 16px
+}
+small
+{
+    color: #526475
+}
+:focus-visible
+{
+    outline: 3px solid #e3a43b;
+    outline-offset: 3px
+}
+.examples
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px
+}
+.demo
+{
+    height: 160px;
+    padding: 20px;
+    border: 1px solid #b1c5d4;
+    background: white
+}
+.box
+{
+    width: 70px;
+    height: 70px;
+    background: #356e94
+}
+.grow
+{
+    transition: transform .5s, background-color .5s
+}
+.grow:hover
+{
+    transform: scale(1.3);
+    background: #b95639
+}
+.fade
+{
+    transition: opacity .6s, border-radius .6s
+}
+.fade:hover
+{
+    opacity: .35;
+    border-radius: 50%
+}
+.route
+{
+    animation: route 4s infinite
+}
+.pulse
+{
+    animation: pulse 3s infinite
+}
+@keyframes route
+{
+    0%
+    {
+        transform: translateX(0) rotate(0)
+    }
+    50%
+    {
+        transform: translateX(150px) rotate(90deg)
+    }
+    100%
+    {
+        transform: translateX(0) rotate(180deg)
+    }
+}
+@keyframes pulse
+{
+    0%
+    {
+        border-radius: 0;
+        background: #356e94
+    }
+    50%
+    {
+        border-radius: 50%;
+        background: #bf7446;
+        transform: scale(.7)
+    }
+    100%
+    {
+        border-radius: 0;
+        background: #356e94
+    }
+}
+/* Адаптация вращающегося куба W3Schools: CSS 3D Transforms — Cube. */ .scene
+{
+    perspective: 650px;
+    width: 130px;
+    height: 130px;
+    margin: 75px auto
+}
+.cube
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: turn 12s linear infinite
+}
+.face
+{
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 2px solid white;
+    background: #236a9c99;
+    color: white;
+    font-size: 30px
+}
+.face1
+{
+    transform: translateZ(65px)
+}
+.face2
+{
+    transform: rotateY(180deg) translateZ(65px)
+}
+.face3
+{
+    transform: rotateY(90deg) translateZ(65px)
+}
+.face4
+{
+    transform: rotateY(-90deg) translateZ(65px)
+}
+.face5
+{
+    transform: rotateX(90deg) translateZ(65px)
+}
+.face6
+{
+    transform: rotateX(-90deg) translateZ(65px)
+}
+@keyframes turn
+{
+    0%
+    {
+        transform: rotateX(0) rotateY(0)
+    }
+    50%
+    {
+        transform: rotateX(180deg) rotateY(180deg)
+    }
+    100%
+    {
+        transform: rotateX(360deg) rotateY(360deg)
+    }
+}
+#pause:checked~.examples .box, #pause:checked~.scene .cube
+{
+    animation-play-state: paused
+}
+@media(max-width: 600px)
+{
+    .examples
+    {
+        grid-template-columns: 1fr
+    }
+}

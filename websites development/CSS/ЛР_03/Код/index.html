@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Селекторы</title>
+<style>
+body
+{
+    font: 18px/1.4 Arial, sans-serif;
+    margin: 25px;
+}
+section > div:first-of-type, section > div:nth-of-type(3)
+{
+    border: 2px solid #356c8f;
+    padding: 8px;
+}
+span
+{
+    color: blue;
+}
+body > div:last-of-type > p
+{
+    font-style: italic;
+}
+section > div:nth-of-type(3) > p:nth-of-type(2)::before
+{
+    content: "ЭТО ";
+}
+section > div:nth-of-type(3) > p:nth-of-type(2)
+{
+    transition: font-size .25s;
+}
+section > div:nth-of-type(3) > p:nth-of-type(2):hover
+{
+    font-size: 26px;
+}
+</style>
+</head>
+	<body>
+		<section>Секция 1 
+			<div>Блок 1</div> 
+			<div>Блок 2</div> 
+			<div>Блок 3 
+				<p>Первый абзац</p> 
+				<p>Второй абзац</p> 
+				<p>Третий абзац</p>
+                <p>Четвертый абзац</p>				
+			</div>
+		</section>
+		<br>
+		
+		<div>Блок 4  
+			<p>Пятый абзац</p> 
+			<p>Шестой абзац</p>
+            <p>Седьмой абзац</p>
+            <p>Восьмой абзац</p>			
+	    </div>
+		<br>
+		
+		<div>Блок 5  
+		    <div>Блок 5_1</div>
+			<div>Блок 5_2</div>
+			<div>Блок 5_3</div>
+			<div>Блок 5_4</div>
+			<p>Девятый абзац</p> 
+			<p>Десятый абзац</p>
+            <p>Одиннадцатый абзац<span>Span 1</span></p>
+            <p>Двенадцатый абзац<span>Span 2</span></p>			
+	    </div>
+	</body>
+</html>

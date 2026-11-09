@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CSS Grid — вариант 1</title>
+        <style>
+*
+{
+    box-sizing: border-box
+}
+body
+{
+    display: grid;
+    grid-template-areas: "header header header" "nav article ads" "nav footer ads";
+    grid-template-columns: 20% minmax(0, 1fr) 15%;
+    grid-template-rows: 60px minmax(0, 1fr) 60px;
+    gap: 10px;
+    height: 100vh;
+    margin: 0;
+    font: 16px Georgia, serif
+}
+header, nav, article, aside, footer
+{
+    background: gold;
+    padding: 20px;
+    min-width: 0;
+    overflow: auto
+}
+header
+{
+    grid-area: header
+}
+nav
+{
+    grid-area: nav
+}
+article
+{
+    grid-area: article
+}
+aside
+{
+    grid-area: ads
+}
+footer
+{
+    grid-area: footer
+}
+@media(max-width: 574px)
+{
+    body
+    {
+        grid-template-areas: "header" "nav" "article" "ads" "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: 80px 70px minmax(0, 1fr) 70px 70px;
+    }
+}
+@media(min-width: 575px) and (max-height: 574px)
+{
+    body
+    {
+        grid-template-areas: "header nav article ads footer";
+        grid-template-columns: 80px 80px minmax(0, 1fr) 80px 80px;
+        grid-template-rows: 1fr
+    }
+}
+</style>
+    </head>
+    <body>
+        <header>Header</header>
+        <nav>Nav</nav>
+        <article>Article</article>
+        <aside>Ads</aside>
+        <footer>Footer</footer>
+    </body>
+</html>

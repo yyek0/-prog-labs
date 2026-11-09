@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Регистрация через форму</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Вы зашли на сайт «Учебный клуб»</h1>
+        <p>Учебная регистрация</p>
+        <form id="register">
+            <fieldset>
+                <legend>Регистрация</legend>
+                <label>Логин <input name="login" required></label>
+                <label>Учебный пароль <input name="password" type="password" required></label>
+                <label>Контрольный вопрос <input name="question" required></label>
+                <label>Ответ <input name="answer" required></label>
+                <input type="submit" value="Зарегистрироваться">
+                <input type="button" id="decline" value="Отказаться">
+            </fieldset>
+        </form>
+        <p id="summary" role="status">
+        </p>
+        <form id="loginForm" hidden>
+            <fieldset>
+                <legend>Тестовый вход</legend>
+                <label>Логин <input name="login" required></label>
+                <label>Пароль <input name="password" type="password" required></label>
+                <input type="submit" value="Войти">
+            </fieldset>
+        </form>
+        <form id="recovery" hidden>
+            <fieldset>
+                <legend>Контрольный вопрос</legend>
+                <p id="question">
+                </p>
+                <label>Ответ <input name="answer" required></label>
+                <input type="submit" value="Проверить ответ">
+            </fieldset>
+        </form>
+        <p id="status" role="status">
+        </p>
+        <script src="script.js">
+        </script>
+    </body>
+</html>

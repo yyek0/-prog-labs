@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Арифметический опрос</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main>
+            <h1>Пять арифметических вопросов</h1>
+            <p>Введите имя, фамилию и ответы. Затем нажмите кнопку проверки.</p>
+            <form id="quiz">
+                <label>
+                    Имя
+                    <input name="first" required>
+                </label>
+                <label>
+                    Фамилия
+                    <input name="last" required>
+                </label>
+                <fieldset>
+                    <legend>Вопросы</legend>
+                    <label>2 + 3 = <input name="q1" type="number" required></label>
+                    <label>9 − 4 = <input name="q2" type="number" required></label>
+                    <label>6 × 7 = <input name="q3" type="number" required></label>
+                    <label>20 / 4 = <input name="q4" type="number" required></label>
+                    <label>17 % 5 = <input name="q5" type="number" required></label>
+                </fieldset>
+                <button type="submit">Проверить ответы</button>
+                <button type="reset">Очистить</button>
+            </form>
+            <p id="result" class="result" role="status"></p>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>

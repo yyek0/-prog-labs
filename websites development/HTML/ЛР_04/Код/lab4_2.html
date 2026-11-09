@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Карта природных объектов</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Выберите область рисунка</h1>
+        <img src="map.svg" usemap="#nature" alt="Три области: горы, лес, озеро" width="600" height="220" style="max-width:none">
+        <map name="nature">
+            <area shape="rect" coords="0,0,200,220" href="lab4_1.html#mountains" alt="Горы">
+            <area shape="rect" coords="200,0,400,220" href="lab4_1.html#forest" alt="Лес">
+            <area shape="rect" coords="400,0,600,220" href="lab4_1.html#lake" alt="Озеро">
+        </map>
+        <p>
+            <a href="lab4_1.html">Вернуться к описаниям</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Тест по веб-разработке</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Тест по основам веб-разработки</h1>
+        <form id="quiz">
+            <fieldset>
+                <legend>1. Какой тег создает ссылку?</legend>
+                <label><input type="radio" name="q1" value="a"> &lt;a&gt;</label>
+                <label><input type="radio" name="q1" value="p"> &lt;p&gt;</label>
+                <label><input type="radio" name="q1" value="img"> &lt;img&gt;</label>
+            </fieldset>
+            <fieldset>
+                <legend>2. Какие языки обычно выполняются браузером? Отметьте все верные.</legend>
+                <label><input type="checkbox" name="q2" value="html"> HTML</label>
+                <label><input type="checkbox" name="q2" value="css"> CSS</label>
+                <label><input type="checkbox" name="q2" value="js"> JavaScript</label>
+                <label><input type="checkbox" name="q2" value="sql"> SQL</label>
+            </fieldset>
+            <fieldset>
+                <legend>3. Может ли один id повторяться в одном HTML-документе по правилам разметки?</legend>
+                <label><input type="radio" name="q3" value="yes"> Да</label>
+                <label><input type="radio" name="q3" value="no"> Нет</label>
+            </fieldset>
+            <fieldset>
+                <legend>4. Как называется свойство CSS для цвета текста?</legend>
+                <label>Ответ <input name="q4" type="text"></label>
+            </fieldset>
+            <label>Результат <input id="score" type="text" readonly value="Тест еще не проверен"></label>
+            <input type="submit" value="Проверить">
+            <input type="reset" value="Сбросить">
+        </form>
+        <script src="script.js">
+        </script>
+    </body>
+</html>
