@@ -23,6 +23,8 @@ class PostMachine:
             action = cmd[0]
             next_pc = cmd[1]
 
+            if action == '0':
+                break
             if action == 'V':
                 self.tape[self.head] = '|'
                 self.pc = next_pc

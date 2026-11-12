@@ -37,9 +37,7 @@ class MarkovAlgorithm:
     def run_addition_5(self):
         print("Запуск НАМ для сложения x + 5...")
         rules_add_5 = [
-            ("|*", "*|", False),
-            ("*", "|||||*", False),
-            ("*", ".", True)
+           ("*", "|||||", True)
         ]
         self.rules = rules_add_5
         self.run()
@@ -48,8 +46,8 @@ class MarkovAlgorithm:
     def run_subtraction_5(self):
         print("Запуск НАМ для вычитания x - 5...")
         rules_sub_5 = [
-            ("|||||", "", False),
-            ("*", ".", True)
+            ("*", "", False),
+            ("|||||", "", True)
         ]
         self.rules = rules_sub_5
         self.run()

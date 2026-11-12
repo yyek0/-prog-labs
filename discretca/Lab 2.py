@@ -31,7 +31,7 @@ def Sin1(x: float) -> float:
     if x > PI/2: 
         x = PI-x
 
-    if x < 0.000001:
+    if x < 1e-6:
         return sign * x
 
     half_sin = Sin1(x/2)
@@ -64,8 +64,8 @@ def Sqrt(s : float) -> float:
 
     x = s / 2.0 if s > 1 else 1.0
     while True:
-        next_x = 0.5 (x + s/x)
-        if Abs(next - x) <= 1e-10:
+        next_x = 0.5 * (x + s/x)
+        if Abs(next_x - x) <= 1e-14 * next_x:
             return next_x
         x = next_x
 
