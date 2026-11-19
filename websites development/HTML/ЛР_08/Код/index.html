@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Анкета учебного клуба</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Анкета участника учебного клуба</h1>
-        <form id="club">
-            <fieldset>
-                <legend>Контактные данные</legend>
-                <label>Имя * <input name="name" required minlength="2" autocomplete="given-name"></label>
-                <label>Электронная почта * <input name="email" type="email" required autocomplete="email"></label>
-                <label>Логин * <input name="login" required pattern="[A-Za-z][A-Za-z0-9_]{3,15}" title="Латинская буква, затем буквы, цифры или _. От 4 до 16 символов."></label>
-                <label>Учебный пароль * <input name="password" type="password" required minlength="6" autocomplete="new-password"></label>
-                <label>Телефон <input name="phone" type="tel" placeholder="+7 900 000-00-00"></label>
-                <label>Личный сайт <input name="site" type="url" placeholder="https://example.com"></label>
-            </fieldset>
-            <fieldset>
-                <legend>Предпочтения</legend>
-                <label>Дата занятия <input name="date" type="date"></label>
-                <label>Удобное время <input name="time" type="time"></label>
-                <label>Месяц <input name="month" type="month"></label>
-                <label>Неделя <input name="week" type="week"></label>
-                <label>Дата и время встречи <input name="meeting" type="datetime-local"></label>
-                <label>Количество занятий <input name="count" type="number" min="1" max="20" value="4"></label>
-                <label>Опыт от 0 до 10 <input name="experience" type="range" min="0" max="10" value="3"></label>
-                <label>Цвет значка <input name="color" type="color" value="#225577"></label>
-                <label>
-                    Направление
-                    <select name="track">
-                        <option>HTML</option>
-                        <option>CSS</option>
-                        <option>JavaScript</option>
-                    </select>
-                </label>
-                <label>
-                    Город
-                    <input name="city" list="cities">
-                    <datalist id="cities">
-                        <option value="Бирск">
-                            <option value="Уфа">
-                                <option value="Казань">
-                                </datalist>
-                            </label>
-                            <label><input type="radio" name="mode" value="online" checked> Онлайн</label>
-                            <label><input type="radio" name="mode" value="offline"> Очно</label>
-                            <label><input type="checkbox" name="news"> Получать учебные новости</label>
-                            <label>Поиск темы <input type="search" name="search"></label>
-                            <label>Файл с примером <input type="file" name="sample" accept=".html,.txt"></label>
-                            <label>
-                                Комментарий
-                                <textarea name="comment" rows="3">
-                                </textarea>
-                            </label>
-                            <input type="hidden" name="formVersion" value="1">
-                            <p>
-                                Условный уровень подготовки:
-                                <meter min="0" max="10" value="3">3 из 10</meter>
-                            </p>
-                        </fieldset>
-                        <input type="submit" value="Проверить анкету">
-                        <input type="reset" value="Сбросить">
-                        <p id="result" role="status">
-                        </p>
-                        <small>Учебная форма: данные проверяются в браузере и никуда не отправляются.</small>
-                    </form>
-                    <script src="form.js">
-                    </script>
-                </body>
-            </html>
+<head>
+    <meta charset="utf-8">
+    <title>Анкета учебного клуба</title>
+</head>
+<body>
+    <h1>Анкета участника учебного клуба</h1>
+    <p><i>Обязательные поля отмечены звездочкой *.</i></p>
+    <form action="#" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Контактная информация</legend>
+            <label>Имя *<br><input type="text" name="name" size="30" maxlength="50" placeholder="Иван Иванов" required autofocus></label><br><br>
+            <label>Электронная почта *<br><input type="email" name="email" size="30" required></label><br><br>
+            <label>Логин *<br><input type="text" name="login" size="30" maxlength="16" pattern="[A-Za-z]{4,16}" title="От 4 до 16 латинских букв" placeholder="От 4 до 16 латинских букв" required></label><br><br>
+            <label>Учебный пароль *<br><input type="password" name="password" size="30" minlength="6" maxlength="30" required></label><br><br>
+            <label>Телефон<br><input type="tel" name="phone" placeholder="+7 900 000-00-00"></label><br><br>
+            <label>Личный сайт<br><input type="url" name="site" size="30" placeholder="https://example.com"></label>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Время занятий</legend>
+            <label>Дата занятия <input type="date" name="date"></label><br><br>
+            <label>Удобное время <input type="time" name="time"></label><br><br>
+            <label>Месяц <input type="month" name="month"></label><br><br>
+            <label>Неделя <input type="week" name="week"></label><br><br>
+            <label>Дата и время встречи <input type="datetime-local" name="meeting"></label><br><br>
+            <label>Дата и время с часовым поясом <input type="datetime" name="zoned" placeholder="2026-12-01T12:00+03:00" size="30"></label>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Предпочтения</legend>
+            <label>Количество занятий <input type="number" name="count" min="1" max="20" value="4"></label><br><br>
+            <label>Опыт от 0 до 10 <input type="range" name="experience" min="0" max="10" value="3"></label><br><br>
+            <label>Цвет значка <input type="color" name="color" value="#225577"></label><br><br>
+            <label>Направление
+                <select name="track">
+                    <option value="html" selected>HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                </select>
+            </label><br><br>
+            <label>Дополнительные темы (можно выбрать несколько)<br>
+                <select name="topics" size="6" multiple>
+                    <optgroup label="HTML">
+                        <option value="text">Текст и ссылки</option>
+                        <option value="tables">Таблицы</option>
+                        <option value="forms">Формы</option>
+                    </optgroup>
+                    <optgroup label="Медиа">
+                        <option value="images">Изображения</option>
+                        <option value="video">Аудио и видео</option>
+                    </optgroup>
+                </select>
+            </label><br><br>
+            <label>Город <input type="text" name="city" list="cities"></label>
+            <datalist id="cities">
+                <option value="Бирск"></option>
+                <option value="Уфа"></option>
+                <option value="Казань"></option>
+            </datalist>
+            <p>Формат занятий:</p>
+            <label><input type="radio" name="mode" value="online" checked> Онлайн</label>
+            <label><input type="radio" name="mode" value="offline"> Очно</label>
+            <p>Интересующие материалы:</p>
+            <label><input type="checkbox" name="materials" value="tasks" checked> Задания</label><br>
+            <label><input type="checkbox" name="materials" value="examples"> Примеры страниц</label><br>
+            <label><input type="checkbox" name="news" value="yes"> Получать учебные новости</label><br><br>
+            <label>Поиск темы <input type="search" name="search"></label><br><br>
+            <label>Файл с примером <input type="file" name="sample" accept=".html,.txt"></label><br><br>
+            <label>Правила клуба<br><textarea name="rules" cols="50" rows="2" readonly>Выполняйте задания и задавайте вопросы на занятиях.</textarea></label><br><br>
+            <label>Комментарий<br><textarea name="comment" cols="50" rows="4"></textarea></label>
+            <input type="hidden" name="formVersion" value="1">
+        </fieldset>
+        <p>Условный уровень подготовки: <meter min="0" max="10" low="3" high="8" value="3">3 из 10</meter></p>
+        <p>Пройдено занятий: <progress value="1" max="4">1 из 4</progress></p>
+        <p>
+            <input type="button" value="Обычная кнопка">
+            <input type="submit" value="Отправить анкету">
+            <input type="reset" value="Сбросить">
+        </p>
+        <p>Графическая кнопка отправки:
+            <input type="image" src="submit.svg" alt="Отправить анкету" width="120" height="32">
+        </p>
+    </form>
+    <p><small>Учебная анкета. Серверный обработчик не подключен.</small></p>
+</body>
+</html>
