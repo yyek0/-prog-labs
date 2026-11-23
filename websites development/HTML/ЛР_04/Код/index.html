@@ -1,11 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Карта изображений</title>
+  <meta charset="utf-8">
+  <title>Таблица классов сетей</title>
+  <style>
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid black; padding: 8px 12px; }
+  </style>
 </head>
 <body>
-    <h1>Карта изображений</h1>
-    <a href="lab4_1.html">Открыть задание 1</a>
+  <h1>Маски сети</h1>
+  <!-- colspan объединяет заголовок двух колонок, rowspan — ячейку A и B. -->
+  <table>
+    <tr><th>Класс сети</th><th colspan="2"><font color="red">Маска сети</font></th></tr>
+    <tr><td rowspan="2">A<br>B</td><td>255.0.0.0</td><td>FF 00 00 00</td></tr>
+    <tr><td>255.255.0.0</td><td>FF FF 00 00</td></tr>
+  </table>
+  <p>Рядом — карта изображения. Нажатие на одну из трёх частей ведёт к нужному разделу первой работы.</p>
+  <img src="map.svg" width="600" height="220" usemap="#sections" alt="Три области карты">
+  <map name="sections">
+    <area shape="rect" coords="0,0,200,220" href="../../ЛР_01/Код/index.html#start" alt="Начало">
+    <area shape="rect" coords="200,0,400,220" href="../../ЛР_01/Код/index.html#middle" alt="Середина">
+    <area shape="rect" coords="400,0,600,220" href="../../ЛР_01/Код/index.html#end" alt="Конец">
+  </map>
 </body>
 </html>

@@ -1,40 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Поход выходного дня</title>
+  <meta charset="utf-8">
+  <title>Лето — пример семантической страницы</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: auto; line-height: 1.5; }
+    header, footer { background: #eee; padding: 14px; }
+    nav a { margin-right: 15px; }
+    aside { background: #fff4bf; padding: 12px; }
+    img { max-width: 100%; height: auto; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Поход выходного дня</h1>
-        <p>Небольшой учебный журнал</p>
-    </header>
-    <nav>
-        <a href="#">Главная</a> |
-        <a href="#">Маршруты</a> |
-        <a href="#">О журнале</a>
-    </nav>
-    <main>
-        <article>
-            <h2>Прогулка к озеру</h2>
-            <p>Короткий маршрут помогает провести день на свежем воздухе и потренироваться планировать дорогу.</p>
-            <figure>
-                <img src="lake.svg" width="620" height="349" alt="Озеро среди зеленых берегов">
-                <figcaption>Рисунок 1 — Спокойное озеро</figcaption>
-            </figure>
-            <section>
-                <h3>Подготовка</h3>
-                <p>Перед выходом я составляю список вещей и выбираю знакомую дорогу.
-                В рюкзак кладу воду, перекус и блокнот.</p>
-            </section>
-            <aside>
-                <h3>Небольшое замечание</h3>
-                <p>На прогулке удобно записывать наблюдения: так проще подготовить связный рассказ после возвращения.</p>
-            </aside>
-        </article>
-    </main>
-    <footer>
-        <p>&copy; Кашапов Роман Радикович, 2026. Учебная страница.</p>
-    </footer>
+  <header>
+    <h1>Мой первый сайт</h1>
+    <nav><a href="#home">Главная</a><a href="#story">Статья</a><a href="#contact">Контакты</a></nav>
+  </header>
+  <main id="home">
+    <article id="story">
+      <h2>Летний день</h2>
+      <p>Летом приятно выехать за город. Мы выбрали место у воды и весь день гуляли на свежем воздухе.</p>
+      <section>
+        <h3>Фотография</h3>
+        <figure><img src="leto.jpg" width="600" alt="Летний пейзаж"><figcaption>Рисунок 1 — лето</figcaption></figure>
+        <p>На фотографии хорошо видно, каким был день.</p>
+      </section>
+    </article>
+    <aside><strong>Примечание:</strong> рисунок хранится рядом с HTML-файлом.</aside>
+  </main>
+  <footer id="contact"><p>Кашапов Роман Радикович, 2026</p></footer>
 </body>
 </html>

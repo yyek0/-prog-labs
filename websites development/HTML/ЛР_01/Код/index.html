@@ -1,15 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Цвет текста и фона</title>
+  <meta charset="utf-8">
+  <title>Лабораторная работа 1 — страницы HTML</title>
 </head>
-<body>
-    <h1>Цвет текста и фона</h1>
-    <!-- Четыре задания лабораторной работы № 1 -->
-    <a href="task1.html">Задание 1. Список на черном фоне</a><br>
-    <a href="task2.html">Задание 2. Список на зеленом фоне</a><br>
-    <a href="task3.html">Задание 3. Фраза на черном фоне</a><br>
-    <a href="task4.html">Задание 4. Фраза на синем фоне</a>
+<body style="background:#111; color:white">
+  <!-- Ссылки ведут к частям этой страницы и к остальным работам. -->
+  <h1 id="start">Моя первая страница</h1>
+  <p><a href="#middle">К середине</a> | <a href="#end">К концу</a></p>
+  <p><font color="red" face="Courier New" size="5">Добро пожаловать!</font>
+     Это моя <u><b><i>первая</i></b></u> страница с HTML.</p>
+  <p align="center"><font color="lime">Кашапов Роман Радикович</font></p>
+  <p><font color="red">Каждый</font> <font color="orange">охотник</font>
+    <font color="yellow">желает</font> <font color="lime">знать</font>,
+    <font color="cyan">где</font> <font color="blue">сидит</font>
+    <font color="violet">фазан</font>.</p>
+  <h2 id="middle">Середина страницы</h2>
+  <p>Здесь проверяется переход по ссылке с символом #. Ниже — ссылки на другие лабораторные.</p>
+  <p><a href="#start">Наверх</a></p>
+  <h2 id="end">Другие работы</h2>
+  <ul>
+    <li><a href="../../ЛР_02/Код/index.html">Форматирование и фон</a></li>
+    <li><a href="../../ЛР_03/Код/index.html">Картинки</a></li>
+    <li><a href="../../ЛР_04/Код/index.html">Таблицы и карта</a></li>
+    <li><a href="../../ЛР_05/Код/index.html">Времена года</a></li>
+    <li><a href="../../ЛР_06/Код/index.html">Списки</a></li>
+    <li><a href="../../ЛР_07/Код/index.html">Фрейм</a></li>
+    <li><a href="../../ЛР_08/Код/index.html">Форма</a></li>
+    <li><a href="../../ЛР_09/Код/index.html">Аудио и видео</a></li>
+    <li><a href="../../ЛР_10/Код/index.html">Семантические элементы</a></li>
+  </ul>
+  <p><a href="#start">Вернуться к началу</a></p>
 </body>
 </html>

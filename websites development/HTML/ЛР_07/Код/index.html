@@ -1,24 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <title>Галерея во фрейме</title>
-</head>
+<head><meta charset="utf-8"><title>Природа во фрейме</title></head>
 <body>
-    <h1>Галерея природы</h1>
-    <table border="0" cellpadding="6">
-        <tr>
-            <td valign="top" width="180">
-                <ul>
-                    <li><a href="view1.html" target="gallery">Горы</a></li>
-                    <li><a href="view2.html" target="gallery">Озеро</a></li>
-                    <li><a href="view3.html" target="gallery">Лес</a></li>
-                </ul>
-            </td>
-            <td>
-                <iframe src="view1.html" name="gallery" title="Выбранный рисунок" width="680" height="480"></iframe>
-            </td>
-        </tr>
-    </table>
+  <h1>Природа</h1>
+  <p>Выберите время года: картинка откроется в рамке ниже.</p>
+  <ul type="square">
+    <li><a href="winter.html" target="nature">Зима</a></li>
+    <li><a href="spring.html" target="nature">Весна</a></li>
+    <li><a href="summer.html" target="nature">Лето</a></li>
+    <li><a href="autumn.html" target="nature">Осень</a></li>
+  </ul>
+  <iframe name="nature" title="Фотография времени года" src="winter.html" width="800" height="550"></iframe>
 </body>
 </html>

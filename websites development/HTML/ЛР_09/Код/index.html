@@ -1,23 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <title>Аудио и видео</title>
-</head>
+<head><meta charset="utf-8"><title>Аудио и видео</title></head>
 <body>
-    <h1>Аудио и видео</h1>
-    <h2>Короткий звуковой сигнал</h2>
-    <audio controls preload="metadata">
-        <source src="media/tone.wav" type="audio/wav">
-        <source src="media/tone.webm" type="audio/webm">
-        Ваш браузер не поддерживает аудио.
-    </audio>
-    <h2>Движение шара</h2>
-    <video controls preload="metadata" width="640" height="360" poster="poster.svg">
-        <source src="media/motion.mp4" type="video/mp4">
-        <source src="media/motion.webm" type="video/webm">
-        Ваш браузер не поддерживает видео.
-    </video>
-    <p>Короткие файлы для демонстрации работы плееров.</p>
+  <h1>Медиаплееры HTML</h1>
+  <p>Браузер выбирает первый формат, который умеет воспроизводить.</p>
+  <h2>Звук</h2>
+  <audio controls>
+    <source src="media/tone.webm" type="audio/webm">
+    <source src="media/tone.wav" type="audio/wav">
+    Ваш браузер не поддерживает audio.
+  </audio>
+  <h2>Видео</h2>
+  <video controls width="640" height="360" poster="poster.svg">
+    <source src="media/motion.mp4" type="video/mp4">
+    <source src="media/motion.webm" type="video/webm">
+    Ваш браузер не поддерживает video.
+  </video>
 </body>
 </html>
