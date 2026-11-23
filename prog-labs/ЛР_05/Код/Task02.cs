@@ -1,97 +1,40 @@
-﻿using System;
-using System.Linq;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
+using System.Text;
+
+static class Plane
+{
+    public class Flight
+    {
+        public int Number;
+        public string From, To;
+        public int FreeSeats;
+        public Flight(int number, string from, string to, int freeSeats)
+        { Number = number; From = from; To = to; FreeSeats = freeSeats; }
+        public override string ToString()
+        { return string.Format("Рейс {0}: {1}–{2}, свободных мест {3}", Number, From, To, FreeSeats); }
+    }
+    private static readonly List<Flight> flights = new List<Flight>();
+    public static void Add(Flight flight) { flights.Add(flight); }
+    public static IEnumerable<Flight> WithMoreThan(int seats)
+    { foreach (Flight flight in flights) if (flight.FreeSeats > seats) yield return flight; }
+}
 
 class Task2
 {
-    [STAThread]
     public static void Main()
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(Build());
-
-    }
-    public static string[] RemoveExclamations(string text)
-    {
-        var result = new List < string > ();
-        foreach(Match m in Regex.Matches(text, @"[^.!?] + [.!?] * "))
-        {
-            string s = m.Value.Trim();
-            if(s.Length > 0&&!s.Contains("!"))result.Add(s);
-        }
-        return result.ToArray();
-    }
-    public static Form Build()
-    {
-        var f = Ui.Form("ЛР 5 — предложения");
-        var input = new ListBox
-        {
-            Location = new Point(20, 65), Size = new Size(405, 310)
-        };
-        var output = new ListBox
-        {
-            Location = new Point(445, 65), Size = new Size(410, 310)
-        };
-        input.Items.AddRange(new object[]
-        {
-            "Привет! Сегодня ясный день. Как дела?", "Отлично! Мы изучаем C#.", "Еще одно предложение! Последняя строка."
-        }
-        );
-        f.Controls.Add(input);
-        f.Controls.Add(output);
-        Ui.Label(f, "Исходный текст", 20, 15, 400);
-        Ui.Label(f, "Без восклицательных предложений", 445, 15, 410);
-        Action process = delegate
-        {
-            output.Items.Clear();
-            foreach(string s in RemoveExclamations(string.Join(" ", input.Items.Cast < string > ())))output.Items.Add(s);
-        };
-        Ui.Button(f, "Обработать", 20, 405, delegate
-        {
-            process();
-        }
-        );
-        process();
-        return f;
-    }
-
-}
-static class Ui
-{
-    public static Form Form(string title)
-    {
-        return new Form
-        {
-            Text = title, ClientSize = new Size(880, 580), Font = new Font("Segoe UI", 11), StartPosition = FormStartPosition.CenterScreen
-        };
-    }
-    public static Button Button(Control parent, string text, int x, int y, EventHandler click)
-    {
-        var button = new Button
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(180, 36)
-        };
-        button.Click += click;
-        parent.Controls.Add(button);
-        return button;
-    }
-    public static Label Label(Control parent, string text, int x, int y, int width = 820)
-    {
-        var label = new Label
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(width, 52)
-        };
-        parent.Controls.Add(label);
-        return label;
-    }
-    public static void Guard(Action action)
-    {
-        action();
+        Console.OutputEncoding = Encoding.UTF8;
+        Plane.Add(new Plane.Flight(101, "Москва", "Казань", 8));
+        Plane.Add(new Plane.Flight(102, "Казань", "Сочи", 16));
+        Plane.Add(new Plane.Flight(103, "Уфа", "Пермь", 2));
+        Plane.Add(new Plane.Flight(104, "Москва", "Уфа", 25));
+        Plane.Add(new Plane.Flight(105, "Самара", "Москва", 10));
+        Console.Write("Минимум свободных мест: ");
+        int threshold = int.Parse(Console.ReadLine());
+        bool found = false;
+        foreach (Plane.Flight flight in Plane.WithMoreThan(threshold))
+        { Console.WriteLine(flight); found = true; }
+        if (!found) Console.WriteLine("Подходящих рейсов нет.");
     }
 }
-
-

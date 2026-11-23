@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Text;
 
 class Task1
 {
+    static long Modul(int a) { return Math.Abs((long)a); }
+    static long Kub(int a) { return (long)a * a * a; }
+
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
-        for(int n = 5; n <= 20; n++)Console.WriteLine("{0} -> {1}", n, Transform(n));
-
+        Console.Write("Целое число: ");
+        int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Модуль: " + Modul(a));
+        Console.WriteLine("Куб: " + Kub(a));
     }
-    public static int Transform(int n)
-    {
-        return n % 5 == 0?n * 5:n - 5;
-    }
-
 }
-
-

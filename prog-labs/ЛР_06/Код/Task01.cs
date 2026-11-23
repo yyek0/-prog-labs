@@ -1,104 +1,66 @@
-﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
+using System;
+using System.Text;
 
+class Professia
+{
+    protected string name, workplace;
+    protected int experience;
+    public string Name { get { return name; } }
+    public string Workplace { get { return workplace; } }
+    public int Experience { get { return experience; } }
+    protected Professia(string name, string workplace, int experience)
+    {
+        this.name = name; this.workplace = workplace; this.experience = experience;
+    }
+    public virtual string Describe()
+    { return string.Format("{0}, место работы: {1}, стаж: {2}", Name, Workplace, Experience); }
+}
+
+class Teacher : Professia
+{
+    private int school;
+    private string subject;
+    public int School { get { return school; } }
+    public string Subject { get { return subject; } }
+    public Teacher(string name, string workplace, int experience, int school, string subject)
+        : base(name, workplace, experience) { this.school = school; this.subject = subject; }
+    public override string Describe()
+    { return "Учитель: " + base.Describe() + ", школа №" + School + ", предмет: " + Subject; }
+}
+class Driver : Professia
+{
+    private string transport;
+    private int distance;
+    public string Transport { get { return transport; } }
+    public int Distance { get { return distance; } }
+    public Driver(string name, string workplace, int experience, string transport, int distance)
+        : base(name, workplace, experience) { this.transport = transport; this.distance = distance; }
+    public override string Describe()
+    { return "Водитель: " + base.Describe() + ", транспорт: " + Transport + ", дальность: " + Distance + " км"; }
+}
+class Doktor : Professia
+{
+    private string department, specialty;
+    public string Department { get { return department; } }
+    public string Specialty { get { return specialty; } }
+    public Doktor(string name, string workplace, int experience, string department, string specialty)
+        : base(name, workplace, experience) { this.department = department; this.specialty = specialty; }
+    public override string Describe()
+    { return "Врач: " + base.Describe() + ", отделение: " + Department + ", профиль: " + Specialty; }
+}
 class Task1
 {
-    [STAThread]
     public static void Main()
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(Build());
-
-    }
-    public static double[] Transform(double[] d)
-    {
-        return d.Select(x => 0.02 * x * x - 0.2 * x + 5).ToArray();
-    }
-    public static Form Build()
-    {
-        var f = Ui.Form("ЛР 6 — e = 0, 02d² − 0, 2d + 5");
-        var a = new ListBox
-        {
-            Location = new Point(25, 65), Size = new Size(390, 400)
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.Write("ФИО учителя: "); string teacher = Console.ReadLine();
+        Console.Write("ФИО водителя: "); string driver = Console.ReadLine();
+        Console.Write("ФИО врача: "); string doctor = Console.ReadLine();
+        Professia[] people = {
+            new Teacher(teacher, "Школа", 8, 12, "математика"),
+            new Driver(driver, "Автопарк", 6, "автобус", 300),
+            new Doktor(doctor, "Больница", 10, "терапия", "терапевт")
         };
-        var b = new ListBox
-        {
-            Location = new Point(445, 65), Size = new Size(390, 400)
-        };
-        f.Controls.Add(a);
-        f.Controls.Add(b);
-        Ui.Label(f, "Массив d", 25, 15, 350);
-        Ui.Label(f, "Массив e", 445, 15, 350);
-        double[] values = null;
-        var random = new Random();
-        Action fill = delegate
-        {
-            values = Enumerable.Range(0, 12).Select(x => (double)random.Next(- 10, 11)).ToArray();
-            a.Items.Clear();
-            b.Items.Clear();
-            foreach(double x in values)a.Items.Add(x);
-        };
-        Action process = delegate
-        {
-            if(values == null)
-            {
-                MessageBox.Show("Сначала заполните массив.");
-                return;
-            }
-            b.Items.Clear();
-            foreach(double x in Transform(values))b.Items.Add(x.ToString("F2"));
-        };
-        Ui.Button(f, "Заполнить", 25, 490, delegate
-        {
-            fill();
-        }
-        );
-        Ui.Button(f, "Обработать", 445, 490, delegate
-        {
-            process();
-        }
-        );
-        fill();
-        process();
-        return f;
-    }
-
-}
-static class Ui
-{
-    public static Form Form(string title)
-    {
-        return new Form
-        {
-            Text = title, ClientSize = new Size(880, 580), Font = new Font("Segoe UI", 11), StartPosition = FormStartPosition.CenterScreen
-        };
-    }
-    public static Button Button(Control parent, string text, int x, int y, EventHandler click)
-    {
-        var button = new Button
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(180, 36)
-        };
-        button.Click += click;
-        parent.Controls.Add(button);
-        return button;
-    }
-    public static Label Label(Control parent, string text, int x, int y, int width = 820)
-    {
-        var label = new Label
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(width, 52)
-        };
-        parent.Controls.Add(label);
-        return label;
-    }
-    public static void Guard(Action action)
-    {
-        action();
+        foreach (Professia person in people) Console.WriteLine(person.Describe());
     }
 }
-
-

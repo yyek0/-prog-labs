@@ -1,108 +1,88 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+using System;
+using System.Text;
+
+abstract class Konstructor
+{
+    public abstract void Stroka();
+    public abstract void Massiv();
+}
+
+class Konstructor1 : Konstructor
+{
+    private readonly string text;
+    private readonly char target;
+    private readonly int[] numbers;
+    public Konstructor1(string text, char target, int[] numbers)
+    { this.text = text; this.target = target; this.numbers = numbers; }
+    public override void Stroka()
+    {
+        int count = 0;
+        foreach (char c in text) if (c == target) count++;
+        Console.WriteLine("Символ '{0}' встречается {1} раз.", target, count);
+    }
+    public override void Massiv()
+    {
+        int sum = 0;
+        foreach (int n in numbers) if (n < 0) sum += n;
+        Console.WriteLine("Сумма отрицательных элементов: " + sum);
+    }
+}
+
+class Konstructor2 : Konstructor
+{
+    private readonly string word;
+    private readonly int[,] matrix;
+    public Konstructor2(string word, int[,] matrix)
+    { this.word = word; this.matrix = matrix; }
+    public override void Stroka()
+    {
+        const string vowels = "аеёиоуыэюя";
+        int run = 0;
+        bool okay = word.Length > 0;
+        bool previousVowel = false;
+        foreach (char letter in word.ToLowerInvariant())
+        {
+            if (letter < 'а' || letter > 'я' && letter != 'ё') { okay = false; break; }
+            bool isVowel = vowels.IndexOf(letter) >= 0;
+            run = run > 0 && isVowel == previousVowel ? run + 1 : 1;
+            if (run > 2) okay = false;
+            previousVowel = isVowel;
+        }
+        Console.WriteLine(okay ? "Слово благозвучное" : "Слово неблагозвучное");
+    }
+    public override void Massiv()
+    {
+        bool found = false;
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            bool hasOne = false;
+            for (int j = 0; j < matrix.GetLength(1); j++) if (matrix[i, j] == 1) hasOne = true;
+            if (!hasOne) { Console.WriteLine("Строка без единиц: " + (i + 1)); found = true; }
+        }
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            bool hasOne = false;
+            for (int i = 0; i < matrix.GetLength(0); i++) if (matrix[i, j] == 1) hasOne = true;
+            if (!hasOne) { Console.WriteLine("Столбец без единиц: " + (j + 1)); found = true; }
+        }
+        if (!found) Console.WriteLine("Строк и столбцов без единиц нет.");
+    }
+}
 
 class Task1
 {
-    [STAThread]
     public static void Main()
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(Build());
-
-    }
-    public static int[] MaxColumns(int[,] a)
-    {
-        int[] result = new int[a.GetLength(1)];
-        for(int j = 0; j < result.Length; j++)
-        {
-            result[j] = a[0, j];
-            for(int i = 1; i < a.GetLength(0); i++)result[j] = Math.Max(result[j], a[i, j]);
-        }
-        return result;
-    }
-    public static DataGridView Grid(Form f, int rows, int cols)
-    {
-        var g = new DataGridView
-        {
-            Location = new Point(20, 65), Size = new Size(835, 360), AllowUserToAddRows = false, AllowUserToDeleteRows = false, RowHeadersWidth = 60
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.Write("Строка: "); string text = Console.ReadLine();
+        Console.Write("Искомый символ: "); string symbol = Console.ReadLine();
+        if (string.IsNullOrEmpty(symbol)) throw new ArgumentException("Символ не введён.");
+        Console.Write("Слово для проверки: "); string word = Console.ReadLine();
+        Konstructor[] examples = {
+            new Konstructor1(text, symbol[0], new[] { -3, 2, -5, 1 }),
+            new Konstructor2(word, new[,] { { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 0 } })
         };
-        for(int j = 0; j < cols; j++)g.Columns.Add("c" + j, (j + 1).ToString());
-        g.RowCount = rows;
-        var r = new Random(7);
-        for(int i = 0; i < rows; i++)
-        {
-            g.Rows[i].HeaderCell.Value = (i + 1).ToString();
-            for(int j = 0; j < cols; j++)g[j, i].Value = r.Next(- 20, 21);
-        }
-        f.Controls.Add(g);
-        return g;
-    }
-    public static int[,] Read(DataGridView g)
-    {
-        var a = new int[g.RowCount, g.ColumnCount];
-        for(int i = 0; i < g.RowCount; i++)for(int j = 0; j < g.ColumnCount; j++)
-        {
-            int x;
-            if(!int.TryParse(Convert.ToString(g[j, i].Value), out x))throw new FormatException("Все ячейки должны содержать целые числа.");
-            a[i, j] = x;
-        }
-        return a;
-    }
-    public static Form Build()
-    {
-        var f = Ui.Form("ЛР 7 — матрица 5 × 3");
-        Ui.Label(f, "Можно изменить значения в таблице", 20, 15);
-        var g = Grid(f, 5, 3);
-        g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        var answer = Ui.Label(f, "", 220, 455, 620);
-        Ui.Button(f, "Максимумы", 20, 455, delegate
-        {
-            Ui.Guard(delegate
-            {
-                g.EndEdit(); answer.Text = "Максимумы столбцов: " + string.Join("; ", MaxColumns(Read(g)));
-            }
-            );
-        }
-        );
-        answer.Text = "Максимумы столбцов: " + string.Join("; ", MaxColumns(Read(g)));
-        return f;
-    }
-
-}
-static class Ui
-{
-    public static Form Form(string title)
-    {
-        return new Form
-        {
-            Text = title, ClientSize = new Size(880, 580), Font = new Font("Segoe UI", 11), StartPosition = FormStartPosition.CenterScreen
-        };
-    }
-    public static Button Button(Control parent, string text, int x, int y, EventHandler click)
-    {
-        var button = new Button
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(180, 36)
-        };
-        button.Click += click;
-        parent.Controls.Add(button);
-        return button;
-    }
-    public static Label Label(Control parent, string text, int x, int y, int width = 820)
-    {
-        var label = new Label
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(width, 52)
-        };
-        parent.Controls.Add(label);
-        return label;
-    }
-    public static void Guard(Action action)
-    {
-        action();
+        foreach (Konstructor example in examples)
+        { example.Stroka(); example.Massiv(); }
     }
 }
-
-

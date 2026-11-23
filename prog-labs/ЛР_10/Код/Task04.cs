@@ -1,71 +1,34 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
+using System;
+using System.Text;
 
 class Task4
 {
-    [STAThread]
+    delegate void PrintNumbers(int lower, int upper, int requiredSum);
+
     public static void Main()
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(Build());
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.Write("Сумма цифр B: ");
+        int b = int.Parse(Console.ReadLine());
+        if (b < 1) throw new ArgumentOutOfRangeException("b");
 
-    }
-    public static int Draw(Graphics g, int count, int index = 0)
-    {
-        if(count < 1||count > 60)throw new ArgumentException("Количество должно быть от 1 до 60.");
-        if(index == count)return 0;
-        double angle = 2 * Math.PI * index / count;
-        float x = 425 + 160 * (float)Math.Cos(angle), y = 255 + 160 * (float)Math.Sin(angle), radius = 8 + index * 3;
-        using(var pen = new Pen(Color.FromArgb(30, 80 + index * 2, 150), 2))g.DrawEllipse(pen, x - radius, y - radius, 2 * radius, 2 * radius);
-        return 1 + Draw(g, count, index + 1);
-    }
-    public static Form Build()
-    {
-        var f = Ui.Form("ЛР 10 — возрастающие окружности");
-        f.Paint += delegate(object sender, PaintEventArgs e)
+        PrintNumbers print = delegate(int lower, int upper, int requiredSum)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Draw(e.Graphics, 12);
+            Console.WriteLine("Числа от " + lower + " до " + upper + ":");
+            bool found = false;
+            for (int number = lower; number <= upper; number++)
+            {
+                int value = number, sum = 0;
+                while (value > 0) { sum += value % 10; value /= 10; }
+                if (sum != requiredSum || number % 2 != 0) continue;
+                Console.Write(number + " ");
+                found = true;
+            }
+            Console.WriteLine(found ? "" : "подходящих чисел нет");
         };
-        return f;
-    }
 
-}
-static class Ui
-{
-    public static Form Form(string title)
-    {
-        return new Form
-        {
-            Text = title, ClientSize = new Size(880, 580), Font = new Font("Segoe UI", 11), StartPosition = FormStartPosition.CenterScreen
-        };
-    }
-    public static Button Button(Control parent, string text, int x, int y, EventHandler click)
-    {
-        var button = new Button
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(180, 36)
-        };
-        button.Click += click;
-        parent.Controls.Add(button);
-        return button;
-    }
-    public static Label Label(Control parent, string text, int x, int y, int width = 820)
-    {
-        var label = new Label
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(width, 52)
-        };
-        parent.Controls.Add(label);
-        return label;
-    }
-    public static void Guard(Action action)
-    {
-        action();
+        print(10, 99, b);
+        print(100, 999, b);
+        print(1000, 9999, b);
     }
 }
-
-

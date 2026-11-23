@@ -1,148 +1,92 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+using System;
+using System.Text;
+
+abstract class Vehicle
+{
+    public double X { get; set; }
+    public double Y { get; set; }
+    public decimal Price { get; set; }
+    public double Speed { get; set; }
+    public int Year { get; set; }
+
+    protected Vehicle(double x, double y, decimal price, double speed, int year)
+    { X = x; Y = y; Price = price; Speed = speed; Year = year; }
+
+    public virtual void Move(double hours) { X += Speed * hours; }
+    public virtual string Info()
+    {
+        return string.Format("{0}: ({1}; {2}), цена {3}, скорость {4}, год {5}",
+            GetType().Name, X, Y, Price, Speed, Year);
+    }
+    public override bool Equals(object obj)
+    {
+        var other = obj as Vehicle;
+        return other != null && GetType() == other.GetType() &&
+            X == other.X && Y == other.Y && Price == other.Price &&
+            Speed == other.Speed && Year == other.Year;
+    }
+    public override int GetHashCode()
+    { return X.GetHashCode() ^ Y.GetHashCode() ^ Price.GetHashCode() ^ Speed.GetHashCode() ^ Year; }
+}
+
+class Plane : Vehicle
+{
+    public double Altitude { get; set; }
+    public int Passengers { get; set; }
+    public Plane(double x, double y, decimal price, double speed, int year, double altitude, int passengers)
+        : base(x, y, price, speed, year) { Altitude = altitude; Passengers = passengers; }
+    public override void Move(double hours) { base.Move(hours); Y += Altitude / 1000.0; }
+    public override string Info() { return base.Info() + ", высота " + Altitude + ", пассажиры " + Passengers; }
+    public override bool Equals(object obj)
+    {
+        var other = obj as Plane;
+        return other != null && base.Equals(other) && Altitude == other.Altitude && Passengers == other.Passengers;
+    }
+    public override int GetHashCode() { return base.GetHashCode() ^ Altitude.GetHashCode() ^ Passengers; }
+}
+
+class Car : Vehicle
+{
+    public string Model { get; set; }
+    public Car(double x, double y, decimal price, double speed, int year, string model)
+        : base(x, y, price, speed, year) { Model = model; }
+    public override string Info() { return base.Info() + ", модель " + Model; }
+    public override bool Equals(object obj)
+    {
+        var other = obj as Car;
+        return other != null && base.Equals(other) && Model == other.Model;
+    }
+    public override int GetHashCode() { return base.GetHashCode() ^ (Model ?? "").GetHashCode(); }
+}
+
+class Ship : Vehicle
+{
+    public int Passengers { get; set; }
+    public string Port { get; set; }
+    public Ship(double x, double y, decimal price, double speed, int year, int passengers, string port)
+        : base(x, y, price, speed, year) { Passengers = passengers; Port = port; }
+    public override string Info() { return base.Info() + ", пассажиры " + Passengers + ", порт " + Port; }
+    public override bool Equals(object obj)
+    {
+        var other = obj as Ship;
+        return other != null && base.Equals(other) && Passengers == other.Passengers && Port == other.Port;
+    }
+    public override int GetHashCode() { return base.GetHashCode() ^ Passengers ^ (Port ?? "").GetHashCode(); }
+}
 
 class Task2
 {
-    [STAThread]
     public static void Main()
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(Build());
-
-    }
-    public static double[,] Transform(int[,] a, out double mean)
-    {
-        long sum = 0;
-        foreach(int x in a)sum += x;
-        mean = (double)sum / a.Length;
-        var b = new double[a.GetLength(0), a.GetLength(1)];
-        for(int i = 0; i < a.GetLength(0); i++)for(int j = 0; j < a.GetLength(1); j++)b[i, j] = i == j?mean:a[i, j];
-        return b;
-    }
-    public static Form Build()
-    {
-        var f = Ui.Form("ЛР 7 — среднее матрицы 15 × 15");
-        f.ClientSize = new Size(1080, 760);
-        Ui.Label(f, "Верхняя таблица — исходная, нижняя — результат", 20, 10, 1040);
-        var input = MatrixInput.Grid(f, 15, 15);
-        input.Size = new Size(1035, 290);
-        input.Location = new Point(20, 50);
-        foreach(DataGridViewColumn c in input.Columns)c.Width = 63;
-        var output = new DataGridView
-        {
-            Location = new Point(20, 395), Size = new Size(1035, 320), AllowUserToAddRows = false, ReadOnly = true, RowHeadersWidth = 60
+        Console.OutputEncoding = Encoding.UTF8;
+        Vehicle[] vehicles = {
+            new Plane(0, 0, 1000000m, 800, 2020, 10000, 180),
+            new Car(0, 0, 150000m, 90, 2022, "Седан"),
+            new Ship(0, 0, 500000m, 40, 2018, 250, "Казань")
         };
-        for(int j = 0; j < 15; j++)
-        {
-            output.Columns.Add("c" + j, (j + 1).ToString());
-            output.Columns[j].Width = 63;
-        }
-        output.RowCount = 15;
-        f.Controls.Add(output);
-        var answer = Ui.Label(f, "", 220, 350, 820);
-        Action process = delegate
-        {
-            input.EndEdit();
-            double mean;
-            var b = Transform(MatrixInput.Read(input), out mean);
-            for(int i = 0; i < 15; i++)
-            {
-                output.Rows[i].HeaderCell.Value = (i + 1).ToString();
-                for(int j = 0; j < 15; j++)
-                {
-                    output[j, i].Value = b[i, j].ToString("0.###");
-                    if(i == j)output[j, i].Style.BackColor = Color.LightYellow;
-                }
-            }
-            answer.Text = "Среднее арифметическое: " + mean.ToString("0.######");
-        };
-        Ui.Button(f, "Обработать", 20, 345, delegate
-        {
-            Ui.Guard(process);
-        }
-        );
-        process();
-        return f;
-    }
-
-}
-static class MatrixInput
-{
-    public static DataGridView Grid(Form form, int rows, int columns)
-    {
-        var grid = new DataGridView
-        {
-            Location = new Point(20, 65), Size = new Size(835, 360), AllowUserToAddRows = false, AllowUserToDeleteRows = false, RowHeadersWidth = 60
-        };
-        for (int column = 0; column < columns; column++)
-        {
-            grid.Columns.Add("c" + column, (column + 1).ToString());
-        }
-        grid.RowCount = rows;
-        var random = new Random(7);
-        for (int row = 0; row < rows; row++)
-        {
-            grid.Rows[row].HeaderCell.Value = (row + 1).ToString();
-            for (int column = 0; column < columns; column++)
-            {
-                grid[column, row].Value = random.Next(- 20, 21);
-            }
-        }
-        form.Controls.Add(grid);
-        return grid;
-    }
-    public static int[,] Read(DataGridView grid)
-    {
-        var values = new int[grid.RowCount, grid.ColumnCount];
-        for (int row = 0; row < grid.RowCount; row++)
-        {
-            for (int column = 0; column < grid.ColumnCount; column++)
-            {
-                int value;
-                if (!int.TryParse(Convert.ToString(grid[column, row].Value), out value))
-                {
-                    throw new FormatException("Все ячейки должны содержать целые числа.");
-                }
-                values[row, column] = value;
-            }
-        }
-        return values;
+        foreach (Vehicle vehicle in vehicles)
+        { vehicle.Move(2); Console.WriteLine(vehicle.Info()); }
+        var sameCar = new Car(180, 0, 150000m, 90, 2022, "Седан");
+        Console.WriteLine("Сравнение автомобилей по значениям: " + vehicles[1].Equals(sameCar));
     }
 }
-static class Ui
-{
-    public static Form Form(string title)
-    {
-        return new Form
-        {
-            Text = title, ClientSize = new Size(880, 580), Font = new Font("Segoe UI", 11), StartPosition = FormStartPosition.CenterScreen
-        };
-    }
-    public static Button Button(Control parent, string text, int x, int y, EventHandler click)
-    {
-        var button = new Button
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(180, 36)
-        };
-        button.Click += click;
-        parent.Controls.Add(button);
-        return button;
-    }
-    public static Label Label(Control parent, string text, int x, int y, int width = 820)
-    {
-        var label = new Label
-        {
-            Text = text, Location = new Point(x, y), Size = new Size(width, 52)
-        };
-        parent.Controls.Add(label);
-        return label;
-    }
-    public static void Guard(Action action)
-    {
-        action();
-    }
-}
-
-

@@ -3,24 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9917C3E6-39A7-57C4-BC51-7BCC789E9C1D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Task01</RootNamespace>
+    <ProjectGuid>{5D67F677-2B06-5C21-B1CA-4C62F96E1F46}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ЛР_09_Task01</RootNamespace>
     <AssemblyName>ЛР_09_Task01</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <LangVersion>5</LangVersion>
-    <BaseOutputPath>bin\</BaseOutputPath>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <Configurations>Debug|AnyCPU;Release|AnyCPU;Debug|x86;Release|x86</Configurations>
-    <Platforms>AnyCPU;x86</Platforms>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Task01.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

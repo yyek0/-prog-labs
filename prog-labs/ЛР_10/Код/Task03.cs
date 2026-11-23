@@ -1,45 +1,19 @@
-﻿using System;
+using System;
 using System.Text;
 
 class Task3
 {
+    delegate void Transform(int a);
+    static void Modul(int a) { Console.WriteLine("Модуль: " + Math.Abs((long)a)); }
+    static void Kub(int a) { Console.WriteLine("Куб: " + ((long)a * a * a)); }
+
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
-        int[][] arrays =
-        {
-            new[]
-            {
-                1, 3, 2
-            }
-            , new[]
-            {
-                - 9, - 2, - 5
-            }
-            , new[]
-            {
-                7
-            }
-            , new[]
-            {
-                0, 0, 0
-            }
-            , new[]
-            {
-                15, 4, 19, 2
-            }
-        };
-        foreach(var a in arrays)Console.WriteLine("[{0}] -> {1}", string.Join("; ", a), Max(a));
-
+        Console.Write("Целое число: ");
+        int a = int.Parse(Console.ReadLine());
+        Transform both = Modul;
+        both += Kub; // Обе функции будут вызваны последовательно.
+        both(a);
     }
-    public static int Max(int[] a, int index = 0)
-    {
-        if(a == null||a.Length == 0)throw new ArgumentException("Массив пуст.");
-        if(index < 0||index >= a.Length)throw new ArgumentOutOfRangeException("index");
-        if(index == a.Length - 1)return a[index];
-        return Math.Max(a[index], Max(a, index + 1));
-    }
-
 }
-
-

@@ -3,22 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1CC9E78E-656E-5084-83AF-E9BBF263AA91}</ProjectGuid>
+    <ProjectGuid>{003AE8F5-67C5-54D6-B4B6-52DC65A178BC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Task02</RootNamespace>
+    <RootNamespace>ЛР_02_Task02</RootNamespace>
     <AssemblyName>ЛР_02_Task02</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <LangVersion>5</LangVersion>
-    <BaseOutputPath>bin\</BaseOutputPath>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <Configurations>Debug|AnyCPU;Release|AnyCPU;Debug|x86;Release|x86</Configurations>
-    <Platforms>AnyCPU;x86</Platforms>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Task02.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
