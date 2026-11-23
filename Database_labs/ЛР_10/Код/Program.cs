@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace FurnitureApp
+namespace TrainingApp
 {
     internal static class Program
     {
